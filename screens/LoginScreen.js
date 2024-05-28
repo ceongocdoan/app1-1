@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Button } from 'react-native';
+import { View } from 'react-native';
 import { GoogleSigninButton } from '@react-native-community/google-signin';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const handleGoogleSignIn = async () => {
-    // Xử lý đăng nhập bằng tài khoản Google ở đây
+    // Thực hiện xử lý đăng nhập bằng tài khoản Google ở đây
+    // Sau khi đăng nhập thành công, chuyển hướng đến màn hình tài khoản
+    navigation.navigate('Account');
   };
 
   return (
