@@ -78,6 +78,7 @@ const MarketIcon = <Icon name="shopping-cart" size={24} color="green" />;
       <View style={styles.offersContainer}>
         <Text style={styles.header}>Ưu Đãi</Text>
         
+        
       </View>
     </ScrollView>
   );
@@ -130,3 +131,4 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
+
