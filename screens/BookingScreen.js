@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Text, TouchableOpacity, Picker, ImageBackground } from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity, ImageBackground } from 'react-native';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import { Picker } from '@react-native-picker/picker';
 
 const BookingScreen = ({ navigation }) => {
   const [selectedCity, setSelectedCity] = useState('Hà Nội');
