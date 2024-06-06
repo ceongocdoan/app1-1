@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
+
+const BACKGROUND_COLOR = '#FFE4E1';
 
 const BookingScreen = ({ navigation }) => {
   const [selectedCity, setSelectedCity] = useState('Hà Nội');
@@ -17,8 +19,8 @@ const BookingScreen = ({ navigation }) => {
 
   const cities = [
     { label: ' Hà Nội', value: 'Hà Nội' },
-    {label: 'Hồ Chí Minh', value: 'Hồ Chí Minh' },
-    {label: 'Đà Nẵng', value: 'Đà Nẵng' }
+    { label: 'Hồ Chí Minh', value: 'Hồ Chí Minh' },
+    { label: 'Đà Nẵng', value: 'Đà Nẵng' }
   ];
 
   const brands = [
@@ -52,19 +54,19 @@ const BookingScreen = ({ navigation }) => {
     try {
       const restaurantData = {
         'Gogi House - Quán thịt nướng Hàn Quốc': [
-          { id: 1, image: require('../assets/gogi.png'), name: 'Gogi House Bùi Thị Xuân', address: '151 Bùi Thị Xuân, Hai Bà Trưng, Hà Nội', phone: '02473007341', rating: 4.5},
-          { id: 2, image: require('../assets/gogi.png'), name: 'Gogi House Vincom Phạm Ngọc Thạch', address: 'L5-01 & 02, Tầng 5, TTTM Vincom Phạm Ngọc Thạch, Đống Đa, Hà Nội', phone: '0987654321', rating: 4.2 },
-          { id: 3, image: require('../assets/gogi.png'), name: 'Gogi House Lê Trọng Tấn', address: 'Số 182 Lê Trọng Tấn ', phone: '1357924680', rating: 4.0 }
+          { id: 1, image: require('../assets/b1.jpg'), name: 'Gogi House Bùi Thị Xuân', address: '151 Bùi Thị Xuân, Hai Bà Trưng, Hà Nội', phone: '02473007341', rating: 4.5},
+          { id: 2, image: require('../assets/b2.jpg'), name: 'Gogi House Vincom Phạm Ngọc Thạch', address: 'L5-01 & 02, Tầng 5, TTTM Vincom Phạm Ngọc Thạch, Đống Đa, Hà Nội', phone: '0987654321', rating: 4.2 },
+          { id: 3, image: require('../assets/b3.jpg'), name: 'Gogi House Lê Trọng Tấn', address: 'Số 182 Lê Trọng Tấn ', phone: '1357924680', rating: 4.0 }
         ],
         'GoGi Steak': [
-          { id: 4, image: require('../assets/gogi.png'), name: 'GoGi Steak Lê Văn Lương', address: 'Số 182 Lê Văn Lương ', phone: '1357924680', rating: 4.0 },
-          { id: 5, image: require('../assets/gogi.png'), name: 'GoGi Steak Nguyễn Khánh Toàn', address: 'Số 182 Nguyễn Khánh Toàn ', phone: '1357924680', rating: 4.0 }
+          { id: 4, image: require('../assets/b1.jpg'), name: 'GoGi Steak Lê Văn Lương', address: 'Số 182 Lê Văn Lương ', phone: '1357924680', rating: 4.0 },
+          { id: 5, image: require('../assets/b3.jpg'), name: 'GoGi Steak Nguyễn Khánh Toàn', address: 'Số 182 Nguyễn Khánh Toàn ', phone: '1357924680', rating: 4.0 }
         ],
         'Kichi-Kichi - Lẩu băng chuyền' :[
-          { id: 6, image: require('../assets/gogi.png'), name: 'Kichi-Kichi Vincom Bà Triệu', address: 'Bà Triệu ', phone: '1357924680', rating: 4.5 },
-          { id: 7, image: require('../assets/gogi.png'), name: 'Kichi-Kichi Tràng Tiền Plaza', address: 'Hoàn Kiếm ', phone: '1357924680', rating: 4.0 },
-          { id: 8, image: require('../assets/gogi.png'), name: 'Kichi-Kichi Times City', address: 'Minh Khai', phone: '1357924680', rating: 4.0 },
-          { id: 9, image: require('../assets/gogi.png'), name: 'Kichi-Kichi Royal City', address: 'Thanh Xuân', phone: '1357924680', rating: 4.0 },
+          { id: 6, image: require('../assets/b2.jpg'), name: 'Kichi-Kichi Vincom Bà Triệu', address: 'Bà Triệu ', phone: '1357924680', rating: 4.5 },
+          { id: 7, image: require('../assets/b3.jpg'), name: 'Kichi-Kichi Tràng Tiền Plaza', address: 'Hoàn Kiếm ', phone: '1357924680', rating: 4.0 },
+          { id: 8, image: require('../assets/b1.jpg'), name: 'Kichi-Kichi Times City', address: 'Minh Khai', phone: '1357924680', rating: 4.0 },
+          { id: 9, image: require('../assets/b3.jpg'), name: 'Kichi-Kichi Royal City', address: 'Thanh Xuân', phone: '1357924680', rating: 4.0 },
         ]
       };
   
@@ -90,34 +92,33 @@ const BookingScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={[styles.container, { backgroundColor: BACKGROUND_COLOR }]}>
       <Picker
         selectedValue={selectedCity}
         onValueChange={handleCitySelect}
-        style={{ width: '100%', height: 50, border: 'none',  marginBottom: 10 }}
+        style={styles.picker}
       >
         {cities.map((city, index) => (
-          
           <Picker.Item label={city.label} value={city.value} key={index} />
-          
         ))}
       </Picker>
 
       <Picker
         selectedValue={selectedBrand}
         onValueChange={handleBrandSelect}
-        style={{ width: '100%', height: 50, borderWidth: 0, borderColor: 'white', marginBottom: 10 }}
+        style={styles.picker}
       >
-        <Picker.Item icon={() => brandIcon} label="Chọn thương hiệu" value={null} />
+        <Picker.Item label="Chọn thương hiệu" value={null} />
         {brands.map((brand, index) => (
           <Picker.Item label={brand.name} value={brand.name} key={index} />
         ))}
       </Picker>
+
       {showTimePicker && (
         <Picker
           selectedValue={selectedTime}
           onValueChange={handleTimeSelect}
-          style={{ width: '100%', height: 50, borderWidth: 1, borderColor: '#ccc', marginBottom: 10 }}
+          style={styles.picker}
         >
           <Picker.Item label="Chọn thời gian" value={null} />
           {times.map((time, index) => (
@@ -130,23 +131,24 @@ const BookingScreen = ({ navigation }) => {
         <Text>Loading...</Text>
       ) : showRestaurantList ? (
         <View>
-          <Text style={{textAlign:"center"}}>Danh sách nhà hàng còn bàn</Text>
-          <ScrollView style={{ flex: 1 }}>
+          <Text style={styles.listHeader}>Danh sách nhà hàng còn bàn</Text>
+          <ScrollView style={styles.restaurantList}>
             {restaurants.map((restaurant, index) => (
               <TouchableOpacity
+                key={index}
                 onPress={() => navigation.navigate('BookingInfo', { 
                   restaurantId: restaurant.id,
                   restaurantName: restaurant.name,
                   restaurantImage: restaurant.image,
                 })}
-                style={{ flexDirection: 'row', borderWidth: 1, borderColor: '#ccc', padding: 10, marginVertical: 5 }}
-              > 
-                <ImageBackground source={restaurant.image} style={{ width: 100, height: 100 }} />
-                <View style={{ flex: 1, marginLeft: 10 }}>
-                  <Text>{restaurant.name}</Text>
-                  <Text>{restaurant.address}</Text>
-                  <Text>{restaurant.phone}</Text>
-                  <Text>Rating: {restaurant.rating}</Text>
+                style={styles.restaurantItem}
+              >
+                <ImageBackground source={restaurant.image} style={styles.restaurantImage} />
+                <View style={styles.restaurantInfo}>
+                  <Text style={styles.restaurantName}>{restaurant.name}</Text>
+                  <Text style={styles.restaurantAddress}>{restaurant.address}</Text>
+                  <Text style={styles.restaurantPhone}>{restaurant.phone}</Text>
+                  <Text style={styles.restaurantRating}>Rating: {restaurant.rating}</Text>
                 </View>
               </TouchableOpacity>
             ))}
@@ -156,5 +158,57 @@ const BookingScreen = ({ navigation }) => {
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  picker: {
+    width: '100%',
+    height: 50,
+    borderWidth: 5,
+    borderColor: '#CC99FF',
+    marginBottom: 10,
+  },
+  listHeader: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  restaurantList: {
+    flex: 1,
+  },
+  restaurantItem: {
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: '#CC99FF',
+    padding: 10,
+    marginVertical: 5,
+  },
+  restaurantImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+  },
+  restaurantInfo: {
+    flex: 1,
+    marginLeft: 10,
+  },
+  restaurantName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  restaurantAddress: {
+    fontStyle: 'italic',
+  },
+  restaurantPhone: {
+    fontWeight: 'bold',
+  },
+  restaurantRating: {
+    marginTop: 5,
+  },
+});
 
 export default BookingScreen;

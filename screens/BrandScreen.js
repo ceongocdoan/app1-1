@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, FlatList, Image } from 'react-native';
 
-
 const BrandScreen = () => {
-  const [brands, setBrands] = useState([
+  const initialBrands = [
     { id: 1, name: 'Dookki' },
     { id: 2, name: 'Gogi House' },
     { id: 3, name: 'Haidilao' },
-  ]);
+  ];
+
+  const [brands, setBrands] = useState(initialBrands);
   const [searchText, setSearchText] = useState('');
 
-  const profile_images = [
+  const profileImages = [
     require('../assets/dookki.jpg'),
     require('../assets/gogi.png'),
     require('../assets/haidilao.jpg'),
@@ -18,10 +19,15 @@ const BrandScreen = () => {
 
   const handleSearch = (text) => {
     setSearchText(text);
-    const filteredBrands = brands.filter((brand) =>
+    const filteredBrands = initialBrands.filter((brand) =>
       brand.name.toLowerCase().includes(text.toLowerCase())
     );
     setBrands(filteredBrands);
+  };
+
+  const resetBrands = () => {
+    setSearchText('');
+    setBrands(initialBrands);
   };
 
   return (
@@ -31,6 +37,7 @@ const BrandScreen = () => {
         placeholder="Nhập tên thương hiệu ..."
         value={searchText}
         onChangeText={(text) => handleSearch(text)}
+        onClear={resetBrands} // Reset danh sách khi xóa văn bản tìm kiếm
       />
 
       <FlatList
@@ -39,8 +46,8 @@ const BrandScreen = () => {
         renderItem={({ item, index }) => (
           <View style={{ flexDirection: 'row', padding: 10, borderColor: '#ccc' }}>
             <Image
-              source={profile_images[index]}
-              style={{ width: 720, height: 280}}
+              source={profileImages[index]}
+              style={{ width: 720, height: 280 }}
             />
           </View>
         )}
